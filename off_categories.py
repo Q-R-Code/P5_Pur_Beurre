@@ -2,7 +2,7 @@ import requests
 
 
 
-class Categories:
+class Categories_request:
 
     def __init__(self):
         self.url = "https://fr.openfoodfacts.org/categories.json"
@@ -17,9 +17,7 @@ class Categories:
         return self.cat_list
 
 
-
-
-class Products:
+class Products_request:
 
     def __init__(self):
         self.req = requests.get(
