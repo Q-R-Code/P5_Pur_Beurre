@@ -6,9 +6,18 @@ body {
 
  }
 
- h1 {
- font-size: 200%;
- color: navy;
- text-align: center;
+h1
+{
+  font-size: 300%;
+  letter-spacing: 5px;
+  color: #000000;
+  padding:16px;
+  text-align:center;
+  margin:16px;
+}
+
+form {
+ padding:100px;
+
  }
 

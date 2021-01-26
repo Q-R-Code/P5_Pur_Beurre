@@ -6,8 +6,15 @@
 <h1>Pur beurre comparateur</h1>
 <form action="" method="POST">
     <div class="input-group">
-        <input type="text" aria-label="First name" class="form-control" name="barcode" placeholder="Code barre de votre produit">
+        <input type="text" aria-label="First name"  class="form-control" name="barcode" placeholder="Code barre de votre produit">
     </div>
-    <button type="submit" class="btn btn-primary" style="margin-top: 20px;">Rechercher</button>
+    <button type="submit" class="btn btn-primary" style="margin-top: 10px;">Rechercher</button>
 </form>
+
+<h3>Voici une selection de catégories populaires:</h3>
+{% for x in cat %}
+
+<ol><a href="https://fr.openfoodfacts.org/categorie/{{x}}">{{x}}</a></ol>
+
+{% endfor %}
 {% endblock %}
