@@ -1,6 +1,7 @@
 from flask import Flask, redirect, url_for, render_template, request, session, flash
 from off_categories import Categories_request, fill_bd
 from create_db import *
+from search_product import search_barcode
 import pymysql
 
 app = Flask(__name__)
@@ -9,10 +10,18 @@ app.config["SQLALCHEMY_DATABASE_URI"] = 'mysql+pymysql://flynz:openfoodfacts@loc
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 
 
-@app.route("/")
+@app.route("/", methods=["POST", "GET"])
 def home():
-    return render_template("home.html", cat=Categories_request().get_cat())
+    if request.method == "POST":
+        barcode = request.form["barcode"]
+        search = search_barcode(barcode)
+        return render_template("produit.html", barcode=search)
+    else:
+        return render_template("home.html", cat=Categories_request().get_cat())
 
+@app.route("/produit")
+def produit():
+    return render_template("produit.html")
 
 @app.route("/login")
 def login():

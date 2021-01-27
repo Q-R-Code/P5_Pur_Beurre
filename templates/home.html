@@ -6,7 +6,7 @@
 <h1>Pur beurre comparateur</h1>
 <form action="" method="POST">
     <div class="input-group">
-        <input type="text" aria-label="First name"  class="form-control" name="barcode" placeholder="Code barre de votre produit">
+        <input type="text" aria-label="First name"  class="form-control" required minlength="13" maxlength="13" name="barcode" placeholder="Code barre de votre produit (EAN/EAN-13)">
     </div>
     <button type="submit" class="btn btn-primary" style="margin-top: 10px;">Rechercher</button>
 </form>
