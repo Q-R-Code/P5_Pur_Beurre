@@ -1,6 +1,7 @@
 from flask import Flask, redirect, url_for, render_template, request, session, flash
-from off_categories import Categories_request
+from off_categories import Categories_request, fill_bd
 from create_db import *
+import pymysql
 
 app = Flask(__name__)
 app.secret_key = "admin"
@@ -20,4 +21,5 @@ def login():
 
 if __name__ == "__main__":
     create_tables()
+    fill_bd()
     app.run(debug=True)

@@ -1,5 +1,5 @@
 import requests
-
+import mysql.connector
 
 
 class Categories_request:
@@ -8,49 +8,44 @@ class Categories_request:
         self.url = "https://fr.openfoodfacts.org/categories.json"
         self.req = requests.get(self.url)
         self.data = self.req.json()
-        self.cat_list = set()
-        self.cat_list_test = {}
+        #self.cat_list = set()
+        self.cat_list_test = []
 
     def get_cat(self):
         for i in range(20):
-            self.cat_list.add(self.data["tags"][i].get("name"))
-        return self.cat_list
+            # self.cat_list.add(self.data["tags"][i].get("name"))
+            self.cat_list_test.append(self.data["tags"][i].get("name"))
+        # return self.cat_list
+        return self.cat_list_test
 
 
-class Products_request:
 
-    def __init__(self):
-        self.req = requests.get(
-            "https://fr.openfoodfacts.org/cgi/search.pl?action=process&unique_scans_n&page=1&json=true")
-        self.data = self.req.json()
-        self.product = {}
-        self.product_name_url = []
+def fill_bd():
 
-    def get_products(self):
-        for i in range(20):
-            name = self.data["products"][i].get("product_name")
-            url = self.data["products"][i].get("url")
-            self.product["name"] = name
-            self.product["url"] = url
-            self.product_name_url.append(self.product)
+    cat = Categories_request()
 
+    try:
+        connection = mysql.connector.connect(host="localhost",
+                                             user="flynz",
+                                             password="openfoodfacts",
+                                             database="pur_beurre",
+                                             auth_plugin='mysql_native_password')
+        cursor = connection.cursor()
+        print("CONNECTION OKAY")
 
-"""
-prod = Products()
-prod.get_products()
+        try:
+            for x in cat.get_cat():
+                cursor.execute(f"""INSERT INTO categories (name) VALUES ("{x}")""")
+            connection.commit()
+            print("OKAY")
+        except:
+            connection.rollback()
+            print("NOP")
 
+    except mysql.connector.errors.InterfaceError as e:
+        print("Error %d: %s" % (e.args[0], e.args[1]))
 
-for x in Categories().get_cat():
-    print(x)
-print(type(data))
-print(data.keys())
-print(type(data["products"][0]))
+    finally:
+        connection.close()
+        print("CLOSE")
 
-
-req = requests.get("https://fr.openfoodfacts.org/cgi/search.pl?action=process&unique_scans_n&page=1&json=true")
-data = req.json()
-for i in range(20):
-    name = data["products"][i].get("product_name")
-    url = data["products"][i].get("url")
-    print("Le nom est : {} et l'url est : {}".format(name, url))
-"""

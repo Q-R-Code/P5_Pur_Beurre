@@ -1,6 +1,6 @@
 from flask_sqlalchemy import SQLAlchemy
 
-from Pur_Beurre_P5.main import app
+from main import app
 
 db = SQLAlchemy(app)
 
