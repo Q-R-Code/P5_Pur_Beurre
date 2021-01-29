@@ -1,7 +1,7 @@
 from flask import Flask, render_template, request
-from off_categories import Categories_request, fill_db
+from off_categories import Categories_request, Products_request
 from create_db import *
-from Pur_Beurre_P5.search_product import search_barcode
+from search_product import search_barcode
 
 app = Flask(__name__)
 app.secret_key = "admin"
@@ -16,7 +16,7 @@ def home():
         search = search_barcode(barcode)
         return render_template("produit.html", barcode=search)
     else:
-        return render_template("home.html", cat=Categories_request().get_cat())
+        return render_template("home.html", cat=Categories_request().get_cat(), prod=Products_request().get_products())
 
 @app.route("/produit")
 def produit():
@@ -29,5 +29,6 @@ def login():
 
 if __name__ == "__main__":
     create_tables()
-    fill_db()
+    Categories_request().fill_db()
+    Products_request().fill_db()
     app.run(debug=True)

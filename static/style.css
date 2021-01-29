@@ -1,5 +1,4 @@
 
-
 h1 {
     font-size: 300%;
     letter-spacing: 5px;
@@ -30,4 +29,9 @@ article {
 
 a {
     color: black;
+}
+
+p {
+    line-height: 0.5;
+
 }

@@ -21,10 +21,9 @@
     </article>
     <article>
         <h3>Une séléction de produits populaires:</h3><br>
-        <p>test</p><br>
-        <p>test</p><br>
-        <p>test</p><br>
-        <p>test</p><br>
+        {% for x in prod %}
+        <p>{{x}}</p><br>
+        {% endfor %}
     </article>
 </section>
 
