@@ -18,9 +18,10 @@ class Categories_request:
         # return self.cat_list
         return self.cat_list_test
 
+#https://fr.openfoodfacts.org/cgi/search.pl?action=process&tagtype_0=unique_scans_n&json=true
 
 
-def fill_bd():
+def fill_db():
 
     cat = Categories_request()
 

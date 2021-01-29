@@ -1,5 +1,5 @@
 from flask import Flask, redirect, url_for, render_template, request, session, flash
-from off_categories import Categories_request, fill_bd
+from off_categories import Categories_request, fill_db
 from create_db import *
 from search_product import search_barcode
 import pymysql
@@ -30,5 +30,5 @@ def login():
 
 if __name__ == "__main__":
     create_tables()
-    fill_bd()
+    fill_db()
     app.run(debug=True)
