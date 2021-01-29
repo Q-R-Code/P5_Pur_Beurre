@@ -1,8 +1,7 @@
-from flask import Flask, redirect, url_for, render_template, request, session, flash
+from flask import Flask, render_template, request
 from off_categories import Categories_request, fill_db
 from create_db import *
-from search_product import search_barcode
-import pymysql
+from Pur_Beurre_P5.search_product import search_barcode
 
 app = Flask(__name__)
 app.secret_key = "admin"
