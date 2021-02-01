@@ -5,7 +5,7 @@ req = requests.get("https://fr.openfoodfacts.org/categories.json")
 
 try:
     connection = mysql.connector.connect(host="localhost",
-                                         user="admin",
+                                         user="flynz",
                                          password="openfoodfacts",
                                          database="openfoodfacts",
                                          auth_plugin='mysql_native_password')
@@ -13,10 +13,9 @@ try:
     cursor = connection.cursor()
 
     try:
-        # cursor.execute("""INSERT INTO category
-        # VALUES (1, 'aliment1'), (2, 'aliment2'), (3, 'aliment3')""")
 
-        connection.commit()
+
+
 
     except:
         connection.rollback()

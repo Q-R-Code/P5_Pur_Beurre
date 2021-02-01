@@ -7,6 +7,13 @@ h1 {
     text-align:center;
     margin:16px;
 }
+h2 {
+   color: #000000;
+   padding:16px;
+   text-align:center;
+   margin:16px;
+
+}
 
 form {
     padding:50px;

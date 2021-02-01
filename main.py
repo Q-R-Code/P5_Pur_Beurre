@@ -1,7 +1,7 @@
 from flask import Flask, render_template, request
 from off_categories import Categories_request, Products_request
 from create_db import *
-from search_product import search_barcode
+from search_product import Search_barcode
 
 app = Flask(__name__)
 app.secret_key = "admin"
@@ -13,10 +13,12 @@ app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 def home():
     if request.method == "POST":
         barcode = request.form["barcode"]
-        search = search_barcode(barcode)
-        return render_template("produit.html", barcode=search)
+        name = Search_barcode().get_name(barcode)
+        url = Search_barcode().get_url(barcode)
+        return render_template("produit.html", name=name, url=url)
     else:
-        return render_template("home.html", cat=Categories_request().get_cat(), prod=Products_request().get_products())
+        return render_template("home.html", cat=Categories_request().get_cat(), prod=Products_request().get_products(),
+                               )
 
 @app.route("/produit")
 def produit():

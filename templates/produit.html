@@ -3,5 +3,13 @@
 {% block title %}Ma recherche{% endblock %}
 
 {% block content %}
-<p>{{barcode}}</p>
+<h1>Vous avez recherché :</h1><br>
+<h2>{{name}}</h2><br>
+<center>
+    <p>Adresse du produit sur OpenFoodFacts:</p>
+    <a href="{{url}}"> {{url}}</a>
+
+
+</center>
+
 {% endblock %}
