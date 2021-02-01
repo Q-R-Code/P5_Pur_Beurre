@@ -33,3 +33,4 @@ class Products(db.Model):
 def create_tables():
     db.drop_all()
     db.create_all()
+

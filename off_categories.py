@@ -6,11 +6,11 @@ class Categories_request:
 
     def __init__(self):
         self.url = "https://fr.openfoodfacts.org/categories.json"
-        self.req = requests.get(self.url)
-        self.data = self.req.json()
         self.cat_list_test = []
 
     def request_cat(self):
+        self.req = requests.get(self.url)
+        self.data = self.req.json()
         for i in range(20):
             self.cat_list_test.append(self.data["tags"][i].get("name"))
         return self.cat_list_test
@@ -55,7 +55,7 @@ class Categories_request:
                 cursor.execute("""SELECT name FROM categories""")
                 rows = cursor.fetchall()
                 for row in rows:
-                    cat_list.append(row)
+                    cat_list.append(row[0])
             except:
                 connection.rollback()
                 print("NOP")
@@ -122,7 +122,7 @@ class Products_request:
                 cursor.execute("""SELECT name FROM products""")
                 rows = cursor.fetchall()
                 for row in rows:
-                    products_list.append(row)
+                    products_list.append(row[0])
             except:
                 connection.rollback()
                 print("NOP")
