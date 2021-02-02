@@ -21,11 +21,10 @@
     </article>
     <article>
         <h3>Une séléction de produits populaires:</h3><br>
-        {% for x in prod %}
-        <p>{{x}}</p>
+        {% for x, y in prod_name.items() %}
+        <a href="https://fr.openfoodfacts.org/produit/{{y}}}">{{x}}</a><br>
         {% endfor %}
     </article>
 </section>
-
 
 {% endblock %}

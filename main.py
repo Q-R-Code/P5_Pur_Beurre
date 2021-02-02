@@ -17,12 +17,14 @@ def home():
         url = Search_barcode().get_url(barcode)
         return render_template("produit.html", name=name, url=url)
     else:
-        return render_template("home.html", cat=Categories_request().get_cat(), prod=Products_request().get_products(),
-                               )
+        return render_template("home.html", cat=Categories_request().get_cat(),
+                               prod_name=Products_request().lists_to_dicts())
+
 
 @app.route("/produit")
 def produit():
     return render_template("produit.html")
+
 
 @app.route("/login")
 def login():

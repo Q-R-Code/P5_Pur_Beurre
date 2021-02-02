@@ -76,6 +76,10 @@ class Products_request:
         self.url = "https://fr.openfoodfacts.org/cgi/search.pl?action=process&tagtype_0=unique_scans_n&json=true"
         self.req = requests.get(self.url)
         self.data = self.req.json()
+        self.products_name_list = []
+        self.products_code_list = []
+        self.call_products()
+        self.lists_to_dicts()
 
     def fill_db(self):
         try:
@@ -108,8 +112,8 @@ class Products_request:
             connection.close()
             print("CLOSE")
 
-    def get_products(self):
-        products_list = []
+    def call_products(self):
+
         try:
             connection = mysql.connector.connect(host="localhost",
                                                  user="flynz",
@@ -122,7 +126,11 @@ class Products_request:
                 cursor.execute("""SELECT name FROM products""")
                 rows = cursor.fetchall()
                 for row in rows:
-                    products_list.append(row[0])
+                    self.products_name_list.append(row[0])
+                cursor.execute("""SELECT barcode FROM products""")
+                rows = cursor.fetchall()
+                for row in rows:
+                    self.products_code_list.append(row[0])
             except:
                 connection.rollback()
                 print("NOP")
@@ -134,4 +142,11 @@ class Products_request:
             connection.close()
             print("CLOSE")
 
-        return products_list
+    def lists_to_dicts(self):
+        if len(self.products_name_list) != len(self.products_code_list):
+            print("PROBLEME LIST_TO_DICT")
+        else:
+            product_name_code = {}
+            for i in range(len(self.products_name_list)):
+                product_name_code[self.products_name_list[i]] = self.products_code_list[i]
+            return product_name_code
