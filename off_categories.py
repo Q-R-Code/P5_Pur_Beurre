@@ -6,14 +6,14 @@ class Categories_request:
 
     def __init__(self):
         self.url = "https://fr.openfoodfacts.org/categories.json"
-        self.cat_list_test = []
+        self.cat_list = []
 
     def request_cat(self):
         self.req = requests.get(self.url)
         self.data = self.req.json()
         for i in range(20):
-            self.cat_list_test.append(self.data["tags"][i].get("name"))
-        return self.cat_list_test
+            self.cat_list.append(self.data["tags"][i].get("name"))
+        return self.cat_list
 
     def fill_db(self):
         try:
@@ -23,34 +23,27 @@ class Categories_request:
                                                  database="pur_beurre",
                                                  auth_plugin='mysql_native_password')
             cursor = connection.cursor()
-            print("CONNECTION OKAY")
-
             try:
                 for x in self.request_cat():
                     cursor.execute(f"""INSERT INTO categories (name) VALUES ("{x}")""")
                 connection.commit()
-                print("OKAY")
             except:
                 connection.rollback()
-                print("NOP")
 
         except mysql.connector.errors.InterfaceError as e:
             print("Error %d: %s" % (e.args[0], e.args[1]))
-
         finally:
             connection.close()
-            print("CLOSE")
 
     def get_cat(self):
         cat_list = []
         try:
             connection = mysql.connector.connect(host="localhost",
-                                                 user="flynz",
-                                                 password="openfoodfacts",
-                                                 database="pur_beurre",
-                                                 auth_plugin='mysql_native_password')
+                                                      user="flynz",
+                                                      password="openfoodfacts",
+                                                      database="pur_beurre",
+                                                      auth_plugin='mysql_native_password')
             cursor = connection.cursor()
-            print("CONNECTION OKAY")
             try:
                 cursor.execute("""SELECT name FROM categories""")
                 rows = cursor.fetchall()
@@ -58,15 +51,11 @@ class Categories_request:
                     cat_list.append(row[0])
             except:
                 connection.rollback()
-                print("NOP")
 
         except mysql.connector.errors.InterfaceError as e:
             print("Error %d: %s" % (e.args[0], e.args[1]))
-
         finally:
             connection.close()
-            print("CLOSE")
-
         return cat_list
 
 
@@ -84,13 +73,11 @@ class Products_request:
     def fill_db(self):
         try:
             connection = mysql.connector.connect(host="localhost",
-                                                 user="flynz",
-                                                 password="openfoodfacts",
-                                                 database="pur_beurre",
-                                                 auth_plugin='mysql_native_password')
+                                                      user="flynz",
+                                                      password="openfoodfacts",
+                                                      database="pur_beurre",
+                                                      auth_plugin='mysql_native_password')
             cursor = connection.cursor()
-            print("CONNECTION OKAY")
-
             try:
                 for x in range(20):
                     name = self.data["products"][x].get("generic_name_fr")
@@ -100,28 +87,23 @@ class Products_request:
                     cursor.execute(
                         f"""INSERT INTO products (name, barcode, url, nutrition_grade) VALUES ("{name}", "{barcode}", "{url}", "{nutrition_grade}")""")
                 connection.commit()
-                print("OKAY")
             except:
                 connection.rollback()
-                print("NOP")
 
         except mysql.connector.errors.InterfaceError as e:
             print("Error %d: %s" % (e.args[0], e.args[1]))
-
         finally:
             connection.close()
-            print("CLOSE")
 
     def call_products(self):
 
         try:
             connection = mysql.connector.connect(host="localhost",
-                                                 user="flynz",
-                                                 password="openfoodfacts",
-                                                 database="pur_beurre",
-                                                 auth_plugin='mysql_native_password')
+                                                      user="flynz",
+                                                      password="openfoodfacts",
+                                                      database="pur_beurre",
+                                                      auth_plugin='mysql_native_password')
             cursor = connection.cursor()
-            print("CONNECTION OKAY")
             try:
                 cursor.execute("""SELECT name FROM products""")
                 rows = cursor.fetchall()
@@ -133,14 +115,11 @@ class Products_request:
                     self.products_code_list.append(row[0])
             except:
                 connection.rollback()
-                print("NOP")
 
         except mysql.connector.errors.InterfaceError as e:
             print("Error %d: %s" % (e.args[0], e.args[1]))
-
         finally:
             connection.close()
-            print("CLOSE")
 
     def lists_to_dicts(self):
         if len(self.products_name_list) != len(self.products_code_list):

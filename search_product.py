@@ -1,15 +1,14 @@
 import requests
 
-"""
-def search_barcode(barcode):
+
+def call_api_test(barcode):
     url = f"https://fr.openfoodfacts.org//api/v0/produit/{barcode}"
     req = requests.get(url)
     data = req.json()
-    return_data = []
-    return_data.append(data["product"].get("product_name"))
-    return return_data
+    return data["status"]
 
-"""
+
+
 
 class Search_barcode():
 

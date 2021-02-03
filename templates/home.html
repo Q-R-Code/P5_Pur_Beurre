@@ -3,7 +3,17 @@
 {% block title %}Accueil{% endblock %}
 
 {% block content %}
+
 <h1>Pur beurre comparateur</h1>
+<center>
+    {% with messages = get_flashed_messages() %}
+        {% if messages %}
+            {% for msg in messages %}
+                <h3>{{msg}}</h3>
+            {% endfor %}
+        {% endif %}
+    {% endwith %}
+</center>
 <form action="" method="POST">
     <div class="input-group">
         <input type="text" aria-label="First name" class="form-control" required minlength="13" maxlength="13"

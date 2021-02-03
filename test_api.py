@@ -78,9 +78,22 @@ for x in range(5):
     print(data["products"][x].get("code"))
     print(data["products"][x].get("nutriscore_grade"))
     print(data["products"][x].get("url"))
-"""
+ 
 
 print(data["products"][5].get("product_name"))
 print(data["products"][5].get("product_name_fr"))
 print(data["products"][5].get("generic_name"))
 print(data["products"][5].get("generic_name_fr"))
+"""
+barcode = "nutella"
+
+def call_api_test(barcode):
+    url = f"https://fr.openfoodfacts.org//api/v0/produit/{barcode}"
+    req = requests.get(url)
+    data = req.json()
+    if data["status"] == 1:
+        print("OK")
+    else:
+        print("nop")
+
+call_api_test(barcode)
