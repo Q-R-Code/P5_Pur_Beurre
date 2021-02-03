@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+
+{% block title %}Ma recherche{% endblock %}
+
+{% block content %}
+<h1>Vous avez recherché :</h1><br>
+<h2><a href="{{url}}"> {{name}}</a></h2><br>
+<section>
+    <article>
+        <p>Le nutriscore pour ce produit est : </p>
+        <img src="https://static.openfoodfacts.org/images/attributes/nutriscore-{{nutriscore}}.svg" alt="" />
+        <p>Voici les valeurs nutritionnelles de celui-ci:</p><br>
+        <img src="{{image_nutrition}}" alt="" />
+    </article>
+    <article>
+        <img src="{{image}}" alt="{{name}}" />
+    </article>
+    <article>
+        <h3>Voici une sélection de substituts avec un meilleur nustriscore :</h3>
+    </article>
+</section>
+<center>
+    <button type="submit" class="btn btn-primary" style="margin-top: 10px;">Enregistrer mon produit</button>
+</center>
+{% endblock %}

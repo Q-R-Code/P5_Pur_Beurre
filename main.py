@@ -15,20 +15,24 @@ def home():
         barcode = request.form["barcode"]
         name = Search_barcode().get_name(barcode)
         url = Search_barcode().get_url(barcode)
-        return render_template("produit.html", name=name, url=url)
+        image = Search_barcode().get_image(barcode)
+        image_nutrition = Search_barcode().get_image_nutrition(barcode)
+        nutriscore = Search_barcode().get_nutriscore(barcode)
+        return render_template("products.html", name=name, url=url, image=image, image_nutrition=image_nutrition,
+                               nutriscore=nutriscore)
     else:
         return render_template("home.html", cat=Categories_request().get_cat(),
                                prod_name=Products_request().lists_to_dicts())
 
 
-@app.route("/produit")
-def produit():
-    return render_template("produit.html")
+@app.route("/products")
+def products():
+    return render_template("products.html")
 
 
-@app.route("/login")
-def login():
-    return render_template("login.html")
+@app.route("/products-saved")
+def my_products():
+    return render_template("products-saved.html")
 
 
 if __name__ == "__main__":

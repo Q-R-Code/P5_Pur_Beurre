@@ -16,13 +16,13 @@
     <article>
         <h3>Voici une selection de catégories populaires:</h3><br>
         {% for x in cat %}
-        <a href="https://fr.openfoodfacts.org/categorie/{{x}}">{{x}}</a><br>
+        <a href="https://fr.openfoodfacts.org/categorie/{{x}}">{{x.capitalize()}}</a><br>
         {% endfor %}
     </article>
     <article>
         <h3>Une séléction de produits populaires:</h3><br>
         {% for x, y in prod_name.items() %}
-        <a href="https://fr.openfoodfacts.org/produit/{{y}}}">{{x}}</a><br>
+        <a href="https://fr.openfoodfacts.org/produit/{{y}}}">{{x.capitalize()}}</a><br>
         {% endfor %}
     </article>
 </section>
