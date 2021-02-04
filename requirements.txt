@@ -1,4 +1,6 @@
 Flask~=1.1.2
 requests~=2.25.1
+flask-sqlalchemy
+pymysql
 mysql~=0.0.2
 mysql-connector-python~=8.0.23
