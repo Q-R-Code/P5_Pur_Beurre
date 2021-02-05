@@ -54,7 +54,7 @@ class Search_barcode():
         self.nutriscore = self.data["product"].get("nutriscore_grade")
         return self.nutriscore
 
-    def search_substitute(self):
+    #def search_substitute(self):
         #recup la catégorie du produit recherché
         #recup le nutriscore
         #lancer une request avec comme critere la categorie, et le nutriscore

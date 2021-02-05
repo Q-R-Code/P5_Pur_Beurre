@@ -21,6 +21,7 @@ def home():
             nutriscore = Search_barcode().get_nutriscore(barcode)
             return render_template("products.html", name=name, url=url, image=image, image_nutrition=image_nutrition,
                                 nutriscore=nutriscore)
+
         else:
             flash("Code barre (EAN) incorrect!")
             return redirect(url_for("home"))
@@ -32,7 +33,6 @@ def home():
 @app.route("/products")
 def products():
     return render_template("products.html")
-
 
 @app.route("/products-saved")
 def my_products():
