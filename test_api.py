@@ -52,6 +52,7 @@ url = "https://fr.openfoodfacts.org/cgi/search.pl?action=process&tagtype_0=uniqu
 req= requests.get(url)
 data = req.json()
 
+
 """
 print(type(data))
 print(data.keys())
@@ -95,8 +96,34 @@ def call_api_test(barcode):
         print("OK")
     else:
         print("nop")
-
 call_api_test(barcode)
 """
+#url1 = "https://fr.openfoodfacts.org/cgi/search.pl?action=process&tagtype_0=categories&tag_contains_0=contains&tag_0=plant-based-foods-and-beverages&tagtype_1=categories&tag_contains_1=contains&tag_1=plant-based-foods&tagtype_2=categories&tag_contains_2=contains&tag_2=snacks-sucres&tagtype_3=categories&tag_contains_3=contains&tag_3=cereals-and-potatoes&page_size=100&json=true"
+#https://fr.openfoodfacts.org/cgi/search.pl?action=process&tagtype_0=categories&tag_contains_0=contains&tag_0=plant-based-foods-and-beverages&tagtype_1=categories&tag_contains_1=contains&tag_1=plant-based-foods&tagtype_2=categories&tag_contains_2=contains&tag_2=snacks-sucres&tagtype_3=categories&tag_contains_3=contains&tag_3=cereals-and-potatoes
 
-#https://fr.openfoodfacts.org/cgi/search.pl?action=process&tagtype_0=categories&tag_contains_0=contains&tag_0=snacks&tagtype_1=categories&tag_contains_1=contains&tag_1=snacks&tagtype_2=categories&tag_contains_2=contains&tag_2=snacks-sucres&tagtype_3=categories&tag_contains_3=contains&tag_3=chocolats
+
+
+def get_cat():
+    url = "https://fr.openfoodfacts.org//api/v0/produit/3017620420009"
+    req = requests.get(url)
+    data= req.json()
+    cat_tags_search = []
+    for x in data["product"]["categories_hierarchy"]:
+        cat_tags_search.append(x[3:])
+    return cat_tags_search
+
+def get_list_better():
+    cat = get_cat()
+    url2 = f"https://fr.openfoodfacts.org/cgi/search.pl?action=process&tagtype_0=categories&tag_contains_0=contains&tag_0={cat[0]}&tagtype_1=categories&tag_contains_1=contains&tag_1={cat[1]}&tagtype_2=categories&tag_contains_2=contains&tag_2={cat[2]}&tagtype_3=categories&tag_contains_3=contains&tag_3={cat[3]}&page_size=100&json=true"
+    req2 = requests.get(url2)
+    search_better_nutriscore = []
+    data2 = req2.json()
+    for x in range(100):
+        score = data2["products"][x].get("nutriscore_grade")
+        if score == str("a"):
+            search_better_nutriscore.append(data2["products"][x])
+    for x in search_better_nutriscore:
+        print(x.get("product_name"), "code:", x.get("code"))
+
+
+get_list_better()

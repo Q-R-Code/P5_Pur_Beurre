@@ -8,8 +8,6 @@ def call_api_test(barcode):
     return data["status"]
 
 
-
-
 class Search_barcode():
 
     def __init__(self):
@@ -54,12 +52,13 @@ class Search_barcode():
         self.nutriscore = self.data["product"].get("nutriscore_grade")
         return self.nutriscore
 
+"""
 class Search_substitutes():
 
     def __init__(self):
 
-
-
-
-
-
+    def connection(self, barcode):
+        url = f"https://fr.openfoodfacts.org//api/v0/produit/{barcode}"
+        req = requests.get(url)
+        self.data = req.json()
+"""
