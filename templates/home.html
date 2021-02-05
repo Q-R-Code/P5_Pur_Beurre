@@ -7,14 +7,14 @@
 <h1>Pur beurre comparateur</h1>
 <center>
     {% with messages = get_flashed_messages() %}
-        {% if messages %}
-            {% for msg in messages %}
-                <h3>{{msg}}</h3>
-            {% endfor %}
-        {% endif %}
+    {% if messages %}
+    {% for msg in messages %}
+    <h3>{{msg}}</h3>
+    {% endfor %}
+    {% endif %}
     {% endwith %}
 </center>
-<form action="" method="POST">
+<form action="{{url_for('products')}}" method="POST">
     <div class="input-group">
         <input type="text" aria-label="First name" class="form-control" required minlength="13" maxlength="13"
                name="barcode" placeholder="Code barre de votre produit (EAN/EAN-13)">
@@ -22,19 +22,21 @@
     <button type="submit" class="btn btn-primary" style="margin-top: 10px;">Rechercher</button>
 </form>
 
-<section>
-    <article>
-        <h3>Voici une selection de catégories populaires:</h3><br>
-        {% for x in cat %}
-        <a href="https://fr.openfoodfacts.org/categorie/{{x}}">{{x.capitalize()}}</a><br>
-        {% endfor %}
-    </article>
-    <article>
-        <h3>Une séléction de produits populaires:</h3><br>
-        {% for x, y in prod_name.items() %}
-        <a href="https://fr.openfoodfacts.org/produit/{{y}}}">{{x.capitalize()}}</a><br>
-        {% endfor %}
-    </article>
-</section>
+    <section>
+        <article>
+            <h3>Voici une selection de catégories populaires:</h3><br>
+            {% for x in cat %}
+                <a href="https://fr.openfoodfacts.org/categorie/{{x}}">{{x.capitalize()}}</a><br>
+            {% endfor %}
+        </article>
+        <article>
+            <h3>Une séléction de produits populaires:</h3><br>
+            {% for x, y in prod_name.items() %}
+                <a href="https://fr.openfoodfacts.org/produit/{{y}}}">{{x.capitalize()}}</a><br>
+            {% endfor %}
+        </article>
+    </section>
+
+
 
 {% endblock %}

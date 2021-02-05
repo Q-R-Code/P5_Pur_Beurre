@@ -31,7 +31,7 @@ class Search_barcode():
 
     def get_name(self, barcode):
         self.connection(barcode)
-        self.name = self.data["product"].get("product_name")
+        self.name = self.data["product"].get("product_name_fr")
         return self.name
 
     def get_url(self, barcode):
@@ -54,22 +54,11 @@ class Search_barcode():
         self.nutriscore = self.data["product"].get("nutriscore_grade")
         return self.nutriscore
 
-    #def search_substitute(self):
-        #recup la catégorie du produit recherché
-        #recup le nutriscore
-        #lancer une request avec comme critere la categorie, et le nutriscore
-        #faire ça 5fois
-        #les ajouter à ma page
+class Search_substitutes():
 
-    def get_substitute(self, barcode):
-        self.connection(barcode)
-        self.substitute = self.data["product"].get("image_url")
-        return self.substitute
+    def __init__(self):
 
-    def get_store_substitute(self, barcode):
-        self.connection(barcode)
-        self.image = self.data["product"].get("image_url")
-        return self.image
+
 
 
 

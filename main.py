@@ -11,6 +11,11 @@ app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 
 @app.route("/", methods=["POST", "GET"])
 def home():
+    return render_template("home.html", cat=Categories_request().get_cat(),
+                            prod_name=Products_request().lists_to_dicts())
+
+@app.route("/products", methods=["POST", "GET"])
+def products():
     if request.method == "POST":
         barcode = request.form["barcode"]
         if call_api_test(barcode) == 1:
@@ -20,19 +25,12 @@ def home():
             image_nutrition = Search_barcode().get_image_nutrition(barcode)
             nutriscore = Search_barcode().get_nutriscore(barcode)
             return render_template("products.html", name=name, url=url, image=image, image_nutrition=image_nutrition,
-                                nutriscore=nutriscore)
-
+                                    nutriscore=nutriscore)
         else:
             flash("Code barre (EAN) incorrect!")
             return redirect(url_for("home"))
     else:
-        return render_template("home.html", cat=Categories_request().get_cat(),
-                               prod_name=Products_request().lists_to_dicts())
-
-
-@app.route("/products")
-def products():
-    return render_template("products.html")
+        return redirect(url_for("home"))
 
 @app.route("/products-saved")
 def my_products():

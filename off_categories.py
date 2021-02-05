@@ -80,7 +80,7 @@ class Products_request:
             cursor = connection.cursor()
             try:
                 for x in range(20):
-                    name = self.data["products"][x].get("generic_name_fr")
+                    name = self.data["products"][x].get("product_name_fr")
                     barcode = self.data["products"][x].get("code")
                     url = self.data["products"][x].get("url")
                     nutrition_grade = self.data["products"][x].get("nutriscore_grade")

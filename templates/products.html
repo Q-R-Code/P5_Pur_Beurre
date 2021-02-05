@@ -1,96 +1,44 @@
 {% extends "base.html" %}
 
-{% block title %}Ma recherche{% endblock %}
+{% block title %}Recherche{% endblock %}
 
 {% block content %}
+
+
 <h1>Vous avez recherché :</h1><br>
 
-<section>
-    <article>
-        <h2><a href="{{url}}"> {{name}}</a></h2><br>
-        <img src="{{image}}" alt="{{name}}" />
-    </article>
-    <article>
-        <p>Le nutriscore pour ce produit est : </p>
-        <img src="https://static.openfoodfacts.org/images/attributes/nutriscore-{{nutriscore}}.svg" alt="" />
-        <br>
-        <p>Voici les valeurs nutritionnelles de celui-ci:</p><br>
-        <img src="{{image_nutrition}}" alt="" />
-    </article>
-</section>
-<center>
-    <h3>Voici une sélection de substituts avec un meilleur nustriscore :</h3>
     <section>
         <article>
-            <p>Nom et image et url</p>
+            <h2><a href="{{url}}"> {{name}}</a></h2><br>
+            <img src="{{image}}" alt="{{name}}"/>
         </article>
         <article>
-            <p>Nutriscore et image valeurs nutri</p>
-        </article>
-        <article>
-            <p>magasins si il y a </p>
-        </article>
-        <article>
-            <form method="POST">
-            <button action="{{}}" type="submit" name="substitute_1" class="btn btn-primary" style="margin-top: 10px;">Enregistrer mon produit</button>
-            </form>
+            <p>Le nutriscore pour ce produit est : </p>
+            <img src="https://static.openfoodfacts.org/images/attributes/nutriscore-{{nutriscore}}.svg" alt=""/>
+            <br>
+            <p>Voici les valeurs nutritionnelles de celui-ci:</p><br>
+            <img src="{{image_nutrition}}" alt=""/>
         </article>
     </section>
-    <section>
-        <article>
-            <p>Nom et image et url</p>
-        </article>
-        <article>
-            <p>Nutriscore et image valeurs nutri</p>
-        </article>
-        <article>
-            <p>magasins si il y a </p>
-        </article>
-        <article>
-            <button type="submit" name="substitute_2" class="btn btn-primary" style="margin-top: 10px;">Enregistrer mon produit</button>
-        </article>
-    </section>
-    <section>
-        <article>
-            <p>Nom et image et url</p>
-        </article>
-        <article>
-            <p>Nutriscore et image valeurs nutri</p>
-        </article>
-        <article>
-            <p>magasins si il y a </p>
-        </article>
-        <article>
-            <button type="submit" name="substitute_3" class="btn btn-primary" style="margin-top: 10px;">Enregistrer mon produit</button>
-        </article>
-    </section>
-    <section>
-        <article>
-            <p>Nom et image et url</p>
-        </article>
-        <article>
-            <p>Nutriscore et image valeurs nutri</p>
-        </article>
-        <article>
-            <p>magasins si il y a </p>
-        </article>
-        <article>
-            <button type="submit" name="substitute_4" class="btn btn-primary" style="margin-top: 10px;">Enregistrer mon produit</button>
-        </article>
-    </section>
-    <section>
-        <article>
-            <p>Nom et image et url</p>
-        </article>
-        <article>
-            <p>Nutriscore et image valeurs nutri</p>
-        </article>
-        <article>
-            <p>magasins si il y a </p>
-        </article>
-        <article>
-            <button type="submit" name="substitute_5" class="btn btn-primary" style="margin-top: 10px;">Enregistrer mon produit</button>
-        </article>
-    </section>
-</center>
+    <center>
+        <h3>Voici une sélection de substituts avec un meilleur nustriscore :</h3>
+        <section>
+            <article>
+                <p>Nom et image et url</p>
+            </article>
+            <article>
+                <p>Nutriscore et image valeurs nutri</p>
+            </article>
+            <article>
+                <p>magasins si il y a </p>
+            </article>
+            <article>
+                <form action="" method="POST">
+                    <input type="text" value="" style="display: none;" name="">
+                    <button  type="submit" class="btn btn-primary">Enregistrer mon produit</button>
+                </form>
+            </article>
+        </section>
+    </center>
+
 {% endblock %}

@@ -84,7 +84,7 @@ print(data["products"][5].get("product_name"))
 print(data["products"][5].get("product_name_fr"))
 print(data["products"][5].get("generic_name"))
 print(data["products"][5].get("generic_name_fr"))
-"""
+
 barcode = "nutella"
 
 def call_api_test(barcode):
@@ -97,3 +97,6 @@ def call_api_test(barcode):
         print("nop")
 
 call_api_test(barcode)
+"""
+
+#https://fr.openfoodfacts.org/cgi/search.pl?action=process&tagtype_0=categories&tag_contains_0=contains&tag_0=snacks&tagtype_1=categories&tag_contains_1=contains&tag_1=snacks&tagtype_2=categories&tag_contains_2=contains&tag_2=snacks-sucres&tagtype_3=categories&tag_contains_3=contains&tag_3=chocolats
