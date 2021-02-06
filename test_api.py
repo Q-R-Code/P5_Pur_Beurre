@@ -122,8 +122,12 @@ def get_list_better():
         score = data2["products"][x].get("nutriscore_grade")
         if score == str("a"):
             search_better_nutriscore.append(data2["products"][x])
-    for x in search_better_nutriscore:
-        print(x.get("product_name"), "code:", x.get("code"))
+    if len(search_better_nutriscore) < 5:
+        for x in range(100):
+            score = data2["products"][x].get("nutriscore_grade")
+            if score == str("b"):
+                search_better_nutriscore.append(data2["products"][x])
+    return search_better_nutriscore
 
 
 get_list_better()

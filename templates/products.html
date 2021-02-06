@@ -20,25 +20,33 @@
             <img src="{{image_nutrition}}" alt=""/>
         </article>
     </section>
+
     <center>
         <h3>Voici une sélection de substituts avec un meilleur nustriscore :</h3>
+        {% if sub_none %}
+            <h3>Il n'y a pas de substitut pour ce produit malheuresement ...</h3>
+        {% else %}
+            {% for x in sub %}
         <section>
             <article>
-                <p>Nom et image et url</p>
+                <p>{{x.get("product_name")}}</p><br>
+                <img src="{{x.get('image_url')}}" height="200" width="200" alt=""/>
             </article>
             <article>
-                <p>Nutriscore et image valeurs nutri</p>
+                <p>Le nutriscore pour ce produit est :</p><br>
+                <img src="https://static.openfoodfacts.org/images/attributes/nutriscore-{{x.get('nutriscore_grade')}}.svg" alt=""/>
+                <p>Voici les valeurs nutritionnelles de celui-ci:</p><br>
+                <img src="{{x.get('image_nutrition_url')}}" height="200" width="200" alt=""/>
             </article>
             <article>
-                <p>magasins si il y a </p>
+                <p>Vous pouvez trouver ce produit chez: : </p>
+                <h3>{{x.get('stores')}}</h3>
             </article>
             <article>
-                <form action="" method="POST">
-                    <input type="text" value="" style="display: none;" name="">
-                    <button  type="submit" class="btn btn-primary">Enregistrer mon produit</button>
-                </form>
+                <button type="submit" class="btn btn-primary" style="margin-top: 10px;">Enregistrer mon produit</button>
             </article>
         </section>
     </center>
-
+    {% endfor %}
+    {% endif %}
 {% endblock %}

@@ -1,7 +1,7 @@
 from flask import Flask, render_template, request, flash, url_for, redirect
 from off_categories import Categories_request, Products_request
 from create_db import *
-from search_product import Search_barcode, call_api_test
+from search_product import Search_barcode, call_api_test, Search_substitutes
 
 app = Flask(__name__)
 app.secret_key = "admin"
@@ -24,8 +24,12 @@ def products():
             image = Search_barcode().get_image(barcode)
             image_nutrition = Search_barcode().get_image_nutrition(barcode)
             nutriscore = Search_barcode().get_nutriscore(barcode)
+            substitutes = Search_substitutes(barcode).get_list_better()
+            sub_none = False
+            if len(substitutes) == 0:
+                sub_none= True
             return render_template("products.html", name=name, url=url, image=image, image_nutrition=image_nutrition,
-                                    nutriscore=nutriscore)
+                                    nutriscore=nutriscore, sub=substitutes, sub_none=sub_none)
         else:
             flash("Code barre (EAN) incorrect!")
             return redirect(url_for("home"))
