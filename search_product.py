@@ -57,11 +57,7 @@ class Search_substitutes():
 
     def __init__(self, barcode):
         self.barcode = barcode
-        self.name = None
-        self.nutriscore = None
-        self.url = None
-        self.image = None
-        self.image_nutrition = None
+
 
     def get_cat(self):
         url = f"https://fr.openfoodfacts.org//api/v0/produit/{self.barcode}"

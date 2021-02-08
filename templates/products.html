@@ -43,7 +43,10 @@
                 <h3>{{x.get('stores')}}</h3>
             </article>
             <article>
-                <button type="submit" class="btn btn-primary" style="margin-top: 10px;">Enregistrer mon produit</button>
+                <form action="{{ url_for('product_to_save')}}" method="POST">
+                    <input type="text" value="{{ x }}" style="display: none;" name="product" >
+                    <button type="submit" class="btn btn-primary" style="margin-top: 10px;">Enregistrer mon produit</button>
+                </form>
             </article>
         </section>
     </center>
