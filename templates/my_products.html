@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+
+{% block title %}Recherche{% endblock %}
+
+{% block content %}
+<h1>Mes produits:</h1><br>
+
+{% for x in products %}
+        <section>
+            <article>
+                <p>{{x[1]}}</p><br>
+                <img src="{{x[3]}}" height="200" width="200" alt=""/>
+            </article>
+            <article>
+                <p>Le nutriscore pour ce produit est :</p><br>
+                <img src="https://static.openfoodfacts.org/images/attributes/nutriscore-{{x[4]}}.svg" alt=""/>
+                <p>Voici les valeurs nutritionnelles de celui-ci:</p><br>
+                <img src="{{x[5]}}" height="200" width="200" alt=""/>
+            </article>
+            <article>
+                <p>Vous pouvez trouver ce produit chez: : </p>
+                <h3>{{x[6]}}</h3>
+            </article>
+        </section>
+{% endfor %}
+{% endblock %}

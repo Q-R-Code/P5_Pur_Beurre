@@ -3,7 +3,7 @@ import mysql
 
 class Sub_to_save():
 
-    def __init__(self, product ):
+    def __init__(self, product):
         self.name = None
         self.url = None
         self.image_url = None
@@ -43,3 +43,29 @@ class Sub_to_save():
             print("Error %d: %s" % (e.args[0], e.args[1]))
         finally:
             connection.close()
+
+
+class My_substitutes():
+
+    def __init__(self):
+        self.substitutes = []
+
+
+    def get_substitues_saved(self):
+        try:
+            connection = mysql.connector.connect(host="localhost",
+                                                 user="flynz",
+                                                 password="openfoodfacts",
+                                                 database="pur_beurre",
+                                                 auth_plugin='mysql_native_password')
+            cursor = connection.cursor()
+            try:
+                cursor.execute("""SELECT * FROM substitutes_saved""")
+                products = cursor.fetchall()
+            except:
+                connection.rollback()
+        except mysql.connector.errors.InterfaceError as e:
+            print("Error %d: %s" % (e.args[0], e.args[1]))
+        finally:
+            connection.close()
+        return products

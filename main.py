@@ -2,8 +2,8 @@ import ast
 
 from flask import Flask, render_template, request, flash, url_for, redirect
 
-from Pur_Beurre_P5.substitute_to_save import Sub_to_save
-from off_categories import Categories_request, Products_request
+from substitute_in_db import Sub_to_save, My_substitutes
+from cat_products_popular import Categories_request, Products_request
 from create_db import *
 from search_product import Search_barcode, call_api_test, Search_substitutes
 
@@ -50,12 +50,13 @@ def product_to_save():
         Sub_to_save(product)
         return redirect(url_for("products"))
     else:
-        return render_template("product_to_save.html")
+        return redirect(url_for("home"))
 
 
 @app.route("/products-saved")
 def my_products():
-    return render_template("products-saved.html")
+    products = My_substitutes().get_substitues_saved()
+    return render_template("my_products.html" , products=products)
 
 
 if __name__ == "__main__":
