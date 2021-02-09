@@ -1,6 +1,8 @@
 import ast
 
 from flask import Flask, render_template, request, flash, url_for, redirect
+
+from Pur_Beurre_P5.substitute_to_save import Sub_to_save
 from off_categories import Categories_request, Products_request
 from create_db import *
 from search_product import Search_barcode, call_api_test, Search_substitutes
@@ -45,13 +47,8 @@ def product_to_save():
     if request.method == "POST":
         product = request.form["product"]
         product = ast.literal_eval(product)
-        name = product.get('product_name')
-        image_url = product.get('image_url')
-        nutriscore_grade = f"https://static.openfoodfacts.org/images/attributes/nutriscore-{product.get('nutriscore_grade')}.svg"
-        image_nutrition = product.get('image_nutrition_url')
-        stores = product.get('stores')
-        return render_template("products-saved.html", name=name, image_url=image_url, nutriscore_grade=nutriscore_grade,
-                               image_nutrition=image_nutrition, stores=stores)
+        Sub_to_save(product)
+        return redirect(url_for("products"))
     else:
         return render_template("product_to_save.html")
 

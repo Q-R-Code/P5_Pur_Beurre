@@ -3,6 +3,11 @@
 {% block title %}Recherche{% endblock %}
 
 {% block content %}
+<script language="javascript">
+function buttonOff( ) {
+   button.disabled = !button.disabled;
+}
+</script>
 
 
 <h1>Vous avez recherché :</h1><br>
@@ -45,7 +50,7 @@
             <article>
                 <form action="{{ url_for('product_to_save')}}" method="POST">
                     <input type="text" value="{{ x }}" style="display: none;" name="product" >
-                    <button type="submit" class="btn btn-primary" style="margin-top: 10px;">Enregistrer mon produit</button>
+                    <button type="submit" class="btn btn-primary" style="margin-top: 10px;" onclick="buttonOff( )">Enregistrer mon produit</button>
                 </form>
             </article>
         </section>
