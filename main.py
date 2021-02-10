@@ -48,6 +48,7 @@ def product_to_save():
         product = request.form["product"]
         product = ast.literal_eval(product)
         Sub_to_save(product)
+        return redirect("products")
     else:
         return redirect(url_for("home"))
 
