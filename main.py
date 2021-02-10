@@ -48,7 +48,6 @@ def product_to_save():
         product = request.form["product"]
         product = ast.literal_eval(product)
         Sub_to_save(product)
-        return redirect(url_for("products"))
     else:
         return redirect(url_for("home"))
 
@@ -56,11 +55,8 @@ def product_to_save():
 @app.route("/products-saved")
 def my_products():
     products = My_substitutes().get_substitues_saved()
-    return render_template("my_products.html" , products=products)
+    return render_template("my_products.html", products=products)
 
 
 if __name__ == "__main__":
-    create_tables()
-    Categories_request().fill_db()
-    Products_request().fill_db()
     app.run(debug=True)
