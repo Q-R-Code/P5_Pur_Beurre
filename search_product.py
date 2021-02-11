@@ -10,8 +10,8 @@ def call_api_test(barcode):
 
 class Search_barcode():
 
-    def __init__(self):
-        self.barcode = None
+    def __init__(self, barcode):
+        self.barcode = barcode
         self.name = None
         self.nutriscore = None
         self.url = None
@@ -20,36 +20,31 @@ class Search_barcode():
         self.substitute = None
         self.store_substitute = None
         self.data = None
-        self.return_data = []
+        self.connection()
 
-    def connection(self, barcode):
-        url = f"https://fr.openfoodfacts.org//api/v0/produit/{barcode}"
+    def connection(self):
+        url = f"https://fr.openfoodfacts.org//api/v0/produit/{self.barcode}"
         req = requests.get(url)
         self.data = req.json()
-
-    def get_name(self, barcode):
-        self.connection(barcode)
         self.name = self.data["product"].get("product_name_fr")
+        self.url = "https://fr.openfoodfacts.org/produit/{}".format(self.data["product"].get("code"))
+        self.image = self.data["product"].get("image_url")
+        self.image_nutrition = self.data["product"].get("image_nutrition_url")
+        self.nutriscore = self.data["product"].get("nutriscore_grade")
+
+    def get_name(self):
         return self.name
 
-    def get_url(self, barcode):
-        self.connection(barcode)
-        self.url = "https://fr.openfoodfacts.org/produit/{}".format(self.data["product"].get("code"))
+    def get_url(self):
         return self.url
 
-    def get_image(self, barcode):
-        self.connection(barcode)
-        self.image = self.data["product"].get("image_url")
+    def get_image(self):
         return self.image
 
-    def get_image_nutrition(self, barcode):
-        self.connection(barcode)
-        self.image_nutrition = self.data["product"].get("image_nutrition_url")
+    def get_image_nutrition(self):
         return self.image_nutrition
 
-    def get_nutriscore(self, barcode):
-        self.connection(barcode)
-        self.nutriscore = self.data["product"].get("nutriscore_grade")
+    def get_nutriscore(self):
         return self.nutriscore
 
 
@@ -65,18 +60,18 @@ class Search_substitutes():
         cat_tags_search = []
         for x in data["product"]["categories_hierarchy"]:
             cat_tags_search.append(x[3:])
+            if len(cat_tags_search) == 4:
+                print(cat_tags_search)
+                return cat_tags_search
         return cat_tags_search
 
     def get_list_better(self):
-        cat = self.get_cat()
-        if len(cat) >= 4:
-            url2 = f"https://fr.openfoodfacts.org/cgi/search.pl?action=process&tagtype_0=categories&tag_contains_0=contains&tag_0={cat[0]}&tagtype_1=categories&tag_contains_1=contains&tag_1={cat[1]}&tagtype_2=categories&tag_contains_2=contains&tag_2={cat[2]}&tagtype_3=categories&tag_contains_3=contains&tag_3={cat[3]}&page_size=100&json=true"
-        elif len(cat) == 3:
-            url2 = f"https://fr.openfoodfacts.org/cgi/search.pl?action=process&tagtype_0=categories&tag_contains_0=contains&tag_0={cat[0]}&tagtype_1=categories&tag_contains_1=contains&tag_1={cat[1]}&tagtype_2=categories&tag_contains_2=contains&tag_2={cat[2]}&page_size=100&json=true"
-        elif len(cat) == 2:
-            url2 = f"https://fr.openfoodfacts.org/cgi/search.pl?action=process&tagtype_0=categories&tag_contains_0=contains&tag_0={cat[0]}&tagtype_1=categories&tag_contains_1=contains&tag_1={cat[1]}&page_size=100&json=true"
-        else:
-            print("PROB LIST CAT SUB")
+        cats = self.get_cat()
+        url2 =f"https://fr.openfoodfacts.org/cgi/search.pl?action=process&"
+        for i in range(len(cats)):
+            url2 += f"tagtype_{i}=categories&tag_contains_{i}=contains&tag_{i}={cats[i]}&"
+        url2 += "page_size=100&json=true"
+        print(url2)
         req2 = requests.get(url2)
         search_better_nutriscore = []
         data2 = req2.json()

@@ -1,4 +1,5 @@
 import ast
+import sys
 
 from flask import Flask, render_template, request, flash, url_for, redirect
 
@@ -24,11 +25,11 @@ def products():
     if request.method == "POST":
         barcode = request.form["barcode"]
         if call_api_test(barcode) == 1:
-            name = Search_barcode().get_name(barcode)
-            url = Search_barcode().get_url(barcode)
-            image = Search_barcode().get_image(barcode)
-            image_nutrition = Search_barcode().get_image_nutrition(barcode)
-            nutriscore = Search_barcode().get_nutriscore(barcode)
+            name = Search_barcode(barcode).get_name()
+            url = Search_barcode(barcode).get_url()
+            image = Search_barcode(barcode).get_image()
+            image_nutrition = Search_barcode(barcode).get_image_nutrition()
+            nutriscore = Search_barcode(barcode).get_nutriscore()
             substitutes = Search_substitutes(barcode).get_list_better()
             sub_none = False
             if len(substitutes) == 0:
@@ -48,7 +49,7 @@ def product_to_save():
         product = request.form["product"]
         product = ast.literal_eval(product)
         Sub_to_save(product)
-        return redirect("products")
+        return redirect(url_for("products"))
     else:
         return redirect(url_for("home"))
 
@@ -56,12 +57,14 @@ def product_to_save():
 @app.route("/products-saved")
 def my_products():
     products = My_substitutes().get_substitues_saved()
-    return render_template("my_products.html", products=products)
+    return render_template("my_products.html" , products=products)
 
 
 if __name__ == "__main__":
-   if sys.argv[1] == "init":
+    if sys.argv[1] == "init":
         create_tables()
         Categories_request().fill_db()
         Products_request().fill_db()
-    app.run(debug=True)
+        app.run(debug=True)
+    elif sys.argv[1] == "run":
+        app.run(debug=True)
