@@ -60,4 +60,8 @@ def my_products():
 
 
 if __name__ == "__main__":
+   if sys.argv[1] == "init":
+        create_tables()
+        Categories_request().fill_db()
+        Products_request().fill_db()
     app.run(debug=True)
