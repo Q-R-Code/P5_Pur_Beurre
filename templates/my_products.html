@@ -22,7 +22,10 @@
                 <h3>{{x[6]}}</h3>
             </article>
             <article>
-                <p>UN BOUTON POUR SUPPR</p>
+                <form action="{{ url_for('product_to_delete')}}" method="POST">
+                    <input type="text" value="{{ x }}" style="display: none;" name="product" >
+                    <button type="submit" class="btn btn-primary" style="margin-top: 10px;" ">Supprimer mon produit</button>
+                </form>
             </article>
         </section>
 {% endfor %}

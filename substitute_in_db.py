@@ -44,6 +44,38 @@ class Sub_to_save():
         finally:
             connection.close()
 
+class Sub_to_delete():
+
+    def __init__(self, product):
+        self.product = product
+        self.id = self.product[0]
+        self.delete_to_db()
+
+    def delete_to_db(self):
+        try:
+            connection = mysql.connector.connect(host="localhost",
+                                                 user="flynz",
+                                                 password="openfoodfacts",
+                                                 database="pur_beurre",
+                                                 auth_plugin='mysql_native_password')
+            cursor = connection.cursor()
+            try:
+                cursor.execute(
+                    f"""DELETE FROM `substitutes_saved` WHERE `substitutes_saved`.`Id` = {self.id} """)
+
+                connection.commit()
+            except:
+                connection.rollback()
+
+        except mysql.connector.errors.InterfaceError as e:
+            print("Error %d: %s" % (e.args[0], e.args[1]))
+        finally:
+            connection.close()
+
+
+
+
+
 
 class My_substitutes():
 
