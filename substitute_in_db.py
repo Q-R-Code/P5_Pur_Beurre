@@ -44,6 +44,7 @@ class Sub_to_save():
         finally:
             connection.close()
 
+
 class Sub_to_delete():
 
     def __init__(self, product):
@@ -73,15 +74,10 @@ class Sub_to_delete():
             connection.close()
 
 
-
-
-
-
 class My_substitutes():
 
     def __init__(self):
         self.substitutes = []
-
 
     def get_substitues_saved(self):
         try:
