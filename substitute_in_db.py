@@ -31,11 +31,17 @@ class Sub_to_save():
                                                  auth_plugin='mysql_native_password')
             cursor = connection.cursor()
             try:
-                cursor.execute(
-                    f"""INSERT INTO substitutes_saved (name, url, image_url, nutrition_grade, image_nutrition, stores)
-                     VALUES 
-                     ("{self.name}", "{self.url}", "{self.image_url}", "{self.nutriscore_grade}", "{self.image_nutrition}","{self.stores}")""")
-                connection.commit()
+                cursor.execute(f"""SELECT name FROM substitutes_saved WHERE name="{self.name}" """)
+                rows = cursor.fetchall()
+                if not rows:
+                    cursor.execute(
+                        f"""INSERT INTO substitutes_saved (name, url, image_url, nutrition_grade, image_nutrition, stores)
+                        VALUES 
+                        ("{self.name}", "{self.url}", "{self.image_url}", "{self.nutriscore_grade}","{self.image_nutrition}","{self.stores}")""")
+                    connection.commit()
+                else:
+                    pass
+
             except:
                 connection.rollback()
 

@@ -20,9 +20,9 @@ class Search_barcode():
         self.substitute = None
         self.store_substitute = None
         self.data = None
-        self.connection()
+        self.get_data()
 
-    def connection(self):
+    def get_data(self):
         url = f"https://fr.openfoodfacts.org//api/v0/produit/{self.barcode}"
         req = requests.get(url)
         self.data = req.json()
@@ -61,7 +61,6 @@ class Search_substitutes():
         for x in data["product"]["categories_hierarchy"]:
             cat_tags_search.append(x[3:])
             if len(cat_tags_search) == 4:
-                print(cat_tags_search)
                 return cat_tags_search
         return cat_tags_search
 
@@ -71,7 +70,6 @@ class Search_substitutes():
         for i in range(len(cats)):
             url2 += f"tagtype_{i}=categories&tag_contains_{i}=contains&tag_{i}={cats[i]}&"
         url2 += "page_size=100&json=true"
-        print(url2)
         req2 = requests.get(url2)
         search_better_nutriscore = []
         data2 = req2.json()

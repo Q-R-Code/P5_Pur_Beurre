@@ -4,7 +4,15 @@
 
 {% block content %}
 <h1>Mes produits:</h1><br>
-
+<center>
+{% with messages = get_flashed_messages() %}
+    {% if messages %}
+    {% for msg in messages %}
+    <h3>{{msg}}</h3>
+    {% endfor %}
+    {% endif %}
+    {% endwith %}
+</center>
 {% for x in products %}
         <section>
             <article>

@@ -4,7 +4,7 @@ import sys
 from flask import Flask, render_template, request, flash, url_for, redirect
 
 
-from substitute_in_db import Sub_to_save, My_substitutes, Sub_to_delete
+from substitute_in_db import Sub_to_save, My_substitutes, Sub_to_delete, check_if_exist
 from cat_products_popular import Categories_request, Products_request
 from create_db import *
 from search_product import Search_barcode, call_api_test, Search_substitutes
@@ -50,7 +50,8 @@ def product_to_save():
         product = request.form["product"]
         product = ast.literal_eval(product)
         Sub_to_save(product)
-        return redirect(request.referrer)
+        return redirect(url_for("my_products"))
+
     else:
         return redirect(request.referrer)
 
@@ -60,7 +61,6 @@ def product_to_delete():
         product = request.form["product"]
         product = ast.literal_eval(product)
         Sub_to_delete(product)
-
         return redirect("products-saved")
     else:
         return redirect(url_for("home"))
@@ -68,7 +68,7 @@ def product_to_delete():
 @app.route("/products-saved")
 def my_products():
     products = My_substitutes().get_substitues_saved()
-    return render_template("my_products.html" , products=products)
+    return render_template("my_products.html", products=products)
 
 
 if __name__ == "__main__":

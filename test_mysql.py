@@ -46,16 +46,23 @@ class My_substitutes():
                                                  auth_plugin='mysql_native_password')
             cursor = connection.cursor()
             try:
-                cursor.execute("""SELECT * FROM substitutes_saved""")
+                cursor.execute("""SELECT name FROM substitutes_saved WHERE name="Ama" """)
                 rows = cursor.fetchall()
-                print(rows)
-                print(rows[0])
-                print(rows[0][1])
+                if rows:
+                    print(rows)
+                    return True
+                else:
+                    print("pas de produits")
+                    return False
             except:
                 print("BUG")
         except:
             print("GROS BUG")
 
-My_substitutes()
+if My_substitutes():
+    print("PRODUIT PRESENT ")
+else:
+    print("NOP")
+
 
 
