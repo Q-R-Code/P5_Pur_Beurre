@@ -33,9 +33,9 @@ class Substitutes_saved(db.Model):
     id = db.Column("Id", db.Integer, primary_key=True)
     name = db.Column("name", db.String(500))
     url = db.Column("url", db.String(500))
-    image_url = db.Column("image_url", db.String(1000))
+    image_url = db.Column("image_url", db.String(500))
     nutrition_grade = db.Column("nutrition_grade", db.String(500))
-    image_nutrition = db.Column("image_nutrition", db.String(1000))
+    image_nutrition = db.Column("image_nutrition", db.String(500))
     stores = db.Column("stores", db.String(500))
 
 
