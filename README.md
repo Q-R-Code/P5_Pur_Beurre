@@ -40,10 +40,10 @@ Ensuite, vous pouvez simplement démarrer l'application avec :
   nutriscore intéressant et des catégories similaires, sont proposés. Il est possible qu'il n'y est pas de substitut
   plus sain pour votre recherche. Pour chaques substituts trouvés, vous avez alors la possibilité de le sauvegarder afin
   de le retrouver dans "Menu>Mes produits". Attention relancer l'application avec l'option "init" réinitialisera
-  totalement la base de données!
+  totalement la base de données !
 
 - ### Mes produits :
-  Vous retrouvez vos produits mis de cotés. Une touche est présente pour retirer ce produit.
+  Vous retrouvez vos produits mis de cotés. Un bouton est présent pour retirer ce produit.
 
 ---------------------------------------------------------------------------------------
 
