@@ -4,10 +4,10 @@ import sys
 from flask import Flask, render_template, request, flash, url_for, redirect
 
 
-from substitute_in_db import Sub_to_save, My_substitutes, Sub_to_delete, check_if_exist
-from cat_products_popular import Categories_request, Products_request
-from create_db import *
-from search_product import Search_barcode, call_api_test, Search_substitutes
+from app.substitute_in_db import Sub_to_save, My_substitutes, Sub_to_delete
+from app.cat_products_popular import Categories_request, Products_request
+from app.create_db import *
+from app.search_product import Search_barcode, call_api_test, Search_substitutes
 
 app = Flask(__name__)
 app.secret_key = "admin"
