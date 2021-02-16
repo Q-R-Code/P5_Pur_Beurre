@@ -1,3 +1,7 @@
+"""
+This module initializes the catégories and products popular on the "home" page.
+
+"""
 import requests
 import mysql.connector
 
@@ -39,10 +43,10 @@ class Categories_request:
         cat_list = []
         try:
             connection = mysql.connector.connect(host="localhost",
-                                                      user="flynz",
-                                                      password="openfoodfacts",
-                                                      database="pur_beurre",
-                                                      auth_plugin='mysql_native_password')
+                                                 user="flynz",
+                                                 password="openfoodfacts",
+                                                 database="pur_beurre",
+                                                 auth_plugin='mysql_native_password')
             cursor = connection.cursor()
             try:
                 cursor.execute("""SELECT name FROM categories""")
@@ -73,10 +77,10 @@ class Products_request:
     def fill_db(self):
         try:
             connection = mysql.connector.connect(host="localhost",
-                                                      user="flynz",
-                                                      password="openfoodfacts",
-                                                      database="pur_beurre",
-                                                      auth_plugin='mysql_native_password')
+                                                 user="flynz",
+                                                 password="openfoodfacts",
+                                                 database="pur_beurre",
+                                                 auth_plugin='mysql_native_password')
             cursor = connection.cursor()
             try:
                 for x in range(20):
@@ -99,10 +103,10 @@ class Products_request:
 
         try:
             connection = mysql.connector.connect(host="localhost",
-                                                      user="flynz",
-                                                      password="openfoodfacts",
-                                                      database="pur_beurre",
-                                                      auth_plugin='mysql_native_password')
+                                                 user="flynz",
+                                                 password="openfoodfacts",
+                                                 database="pur_beurre",
+                                                 auth_plugin='mysql_native_password')
             cursor = connection.cursor()
             try:
                 cursor.execute("""SELECT name FROM products""")

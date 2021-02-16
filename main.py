@@ -1,3 +1,8 @@
+"""
+The main module of this app. Launch Flask, initializes the different routes.
+
+"""
+
 import ast
 import sys
 
@@ -17,12 +22,23 @@ app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 
 @app.route("/", methods=["POST", "GET"])
 def home():
+    """
+    This is the main route of the program, "home.html"
+    Generate popular categories and products.
+
+    """
     return render_template("home.html", cat=Categories_request().get_cat(),
                            prod_name=Products_request().lists_to_dicts())
 
 
 @app.route("/products", methods=["POST", "GET"])
 def products():
+    """
+    This route is called when a user does a search with a barcode.
+    - Call the API , check if it responds and returns the "products.html" page with the desired product
+    and these substitutes.
+
+    """
     if request.method == "POST":
         barcode = request.form["barcode"]
         if call_api_test(barcode) == 1:
@@ -46,6 +62,11 @@ def products():
 
 @app.route("/product_to_save", methods=["POST", "GET"])
 def product_to_save():
+    """
+    When a user wants to register a substitute with the button, call this route.
+    redirect to "my_products.html" page.
+
+    """
     if request.method == "POST":
         product = request.form["product"]
         product = ast.literal_eval(product)
@@ -57,6 +78,10 @@ def product_to_save():
 
 @app.route("/product_to_delete", methods=["POST", "GET"])
 def product_to_delete():
+    """
+    When the button "supprimer" in my_products.html,  call this route to delete the substitute.
+
+    """
     if request.method == "POST":
         product = request.form["product"]
         product = ast.literal_eval(product)
@@ -67,6 +92,10 @@ def product_to_delete():
 
 @app.route("/products-saved")
 def my_products():
+    """
+    return the page my_products with the substitutes saved in the table "substitutes_saved".
+
+    """
     products = My_substitutes().get_substitues_saved()
     return render_template("my_products.html", products=products)
 
