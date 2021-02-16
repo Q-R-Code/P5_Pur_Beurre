@@ -1,3 +1,10 @@
+"""
+This module use SQLAlchemy for create the different tables at the first launch.
+* Categories & Products : for the home page.
+* Substitutes_saved : To save the substitutes and find them in "mes produits".
+
+"""
+
 from flask_sqlalchemy import SQLAlchemy
 
 from main import app
@@ -48,6 +55,11 @@ class Substitutes_saved(db.Model):
 
 
 def create_tables():
+    """
+    This fonction is called when the user writes : "main.py init" at the launch
+    Drop all tables and recreate them. Can be useful for updating popular categories and products on the home page.
+
+    """
     db.drop_all()
     db.create_all()
 

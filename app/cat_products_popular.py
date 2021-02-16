@@ -7,6 +7,10 @@ import mysql.connector
 
 
 class Categories_request:
+    """
+    Call the API, fill the DB with 20 popular categories and returns it.
+
+    """
 
     def __init__(self):
         self.url = "https://fr.openfoodfacts.org/categories.json"
@@ -39,7 +43,7 @@ class Categories_request:
         finally:
             connection.close()
 
-    def get_cat(self):
+    def get_cat(self) -> list:
         cat_list = []
         try:
             connection = mysql.connector.connect(host="localhost",
@@ -64,6 +68,10 @@ class Categories_request:
 
 
 class Products_request:
+    """
+    Call the API , fill the DB and returns it too. One method for converts two lists in one dict.
+
+    """
 
     def __init__(self):
         self.url = "https://fr.openfoodfacts.org/cgi/search.pl?action=process&tagtype_0=unique_scans_n&json=true"
@@ -99,7 +107,7 @@ class Products_request:
         finally:
             connection.close()
 
-    def call_products(self):
+    def call_products(self) -> list:
 
         try:
             connection = mysql.connector.connect(host="localhost",
@@ -125,7 +133,7 @@ class Products_request:
         finally:
             connection.close()
 
-    def lists_to_dicts(self):
+    def lists_to_dicts(self) -> dict:
         if len(self.products_name_list) != len(self.products_code_list):
             print("PROBLEME LIST_TO_DICT")
         else:

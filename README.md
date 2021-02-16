@@ -1,3 +1,5 @@
+[![forthebadge made-with-python](http://ForTheBadge.com/images/badges/made-with-python.svg)](https://www.python.org/)
+<img alt="Flask" src="https://img.shields.io/badge/flask%20-%23000.svg?&style=for-the-badge&logo=flask&logoColor=white"/>
 # Utilisez les données publiques de l'OpenFoodFacts #
 
 Cet outil aidera les utilisateurs de la start-up Pur Beurre afin de comparer et de leur proposer des produits

@@ -1,3 +1,10 @@
+"""
+This is for "mes produits", and the substitutes saved.
+* For save or delete substitutes
+* For showing what's inside DB "substitutes_saved"
+
+"""
+
 import mysql
 
 
@@ -23,6 +30,10 @@ class Sub_to_save():
         self.stores = self.product.get('stores')
 
     def save_in_db(self):
+        """
+        This method is for saving a substitute in the DB, we first check if it exists.
+
+        """
         try:
             connection = mysql.connector.connect(host="localhost",
                                                  user="flynz",
@@ -85,7 +96,7 @@ class My_substitutes():
     def __init__(self):
         self.substitutes = []
 
-    def get_substitues_saved(self):
+    def get_substitues_saved(self) -> list:
         try:
             connection = mysql.connector.connect(host="localhost",
                                                  user="flynz",
