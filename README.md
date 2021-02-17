@@ -18,11 +18,11 @@ Télécharger et décompresser le repository puis créer un VENV. Installez ensu
 
     pip3 install -r requirements.txt
 
-Lors du premier lancement de l'application, vous devez initialiser les tables de la base de donnée:
+Lors du premier lancement de l'application, vous devez initialiser les tables de la base de données : 
 
     python3 main.py init
 
-Ensuite, vous pouvez simplement démarrer l'application avec :
+Pour démarrer l'application sans toucer aux tables : 
 
     python3 main.py run
 
@@ -32,7 +32,8 @@ Ensuite, vous pouvez simplement démarrer l'application avec :
 
 - ### Accueil :
   Une barre de recherche permettant de retrouver un produit par rapport à son code barre EAN et un request API
-  Openfoodfacts. Retourne une page avec le produit recherché. Deux sections sont aussi présentes. La premiere "les
+  Openfoodfacts. Retourne une page avec le produit recherché. 
+  Deux sections sont aussi présentes. La premiere "les
   catégories populaires" sur OpenFoodFacts et ensuite une selection de produits populaires. Ces deux sections sont
   affichées depuis la base de données au préalablement chargé grace à un appel API.
 
@@ -51,7 +52,7 @@ Ensuite, vous pouvez simplement démarrer l'application avec :
 
 ## Modules :
 
-- main.py : Permet l'initialisation du programme.
+- main.py : Permet l'initialisation du programme, la gestion des routes Flask.
 - create_db.py : Les différentes tables nécessaires au fonctionnement.
 - cat_products_popular.py : Ce module request les catégories et des produits populaires sur l'API de OpenFoodFacts.
   Charge ensuite les données dans les tables prévues à cet effet.
