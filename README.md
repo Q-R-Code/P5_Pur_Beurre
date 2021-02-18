@@ -22,9 +22,9 @@ Lors du premier lancement de l'application, vous devez initialiser les tables de
 
     python3 main.py init
 
-Pour démarrer l'application sans toucer aux tables : 
+Pour démarrer l'application : 
 
-    python3 main.py run
+    python3 main.py 
 
 ----------------------------------------------------------------------------
 

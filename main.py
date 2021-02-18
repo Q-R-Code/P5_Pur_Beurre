@@ -8,7 +8,6 @@ import sys
 
 from flask import Flask, render_template, request, flash, url_for, redirect
 
-
 from app.substitute_in_db import Sub_to_save, My_substitutes, Sub_to_delete
 from app.cat_products_popular import Categories_request, Products_request
 from app.create_db import *
@@ -20,11 +19,12 @@ app.config["SQLALCHEMY_DATABASE_URI"] = 'mysql+pymysql://flynz:openfoodfacts@loc
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 
 
+
 @app.route("/", methods=["POST", "GET"])
 def home():
     """
     This is the main route of the program, "home.html"
-    Generate popular categories and products.
+    Generates popular categories and products.
 
     """
     return render_template("home.html", cat=Categories_request().get_cat(),
@@ -34,11 +34,12 @@ def home():
 @app.route("/products", methods=["POST", "GET"])
 def products():
     """
-    This route is called when a user does a search with a barcode.
-    - Call the API , check if it responds and returns the "products.html" page with the desired product
-    and these substitutes.
+    This route is called when a user searches with a barcode.
+    - Calls the API , check if it responds and returns the "products.html" page with the desired product
+    and its substitutes.
 
     """
+    global products_data
     if request.method == "POST":
         barcode = request.form["barcode"]
         if call_api_test(barcode) == 1:
@@ -51,12 +52,16 @@ def products():
             sub_none = False
             if len(substitutes) == 0:
                 sub_none = True
-            return render_template("products.html", name=name, url=url, image=image, image_nutrition=image_nutrition,
+            products_data = {"name": name, "url": url, "image": image, "image_nutrition": image_nutrition,
+                             "nutriscore": nutriscore, "substitutes": substitutes, "sub_none" : sub_none}
+            return render_template("products.html",  name=name, url=url, image=image, image_nutrition=image_nutrition,
                                    nutriscore=nutriscore, sub=substitutes, sub_none=sub_none)
         else:
+            products_data = {}
             flash("Code barre (EAN) incorrect!")
             return redirect(url_for("home"))
     else:
+        products_data = {}
         return redirect(url_for("home"))
 
 
@@ -71,10 +76,12 @@ def product_to_save():
         product = request.form["product"]
         product = ast.literal_eval(product)
         Sub_to_save(product)
-        return redirect(url_for("my_products"))
+        return render_template("products.html", name=products_data["name"], url=products_data["url"], image=products_data["image"], image_nutrition=products_data["image_nutrition"],
+                                   nutriscore=products_data["nutriscore"], sub=products_data["substitutes"], sub_none=products_data["sub_none"])
 
     else:
         return redirect(request.referrer)
+
 
 @app.route("/product_to_delete", methods=["POST", "GET"])
 def product_to_delete():
@@ -90,6 +97,7 @@ def product_to_delete():
     else:
         return redirect(url_for("home"))
 
+
 @app.route("/products-saved")
 def my_products():
     """
@@ -101,10 +109,8 @@ def my_products():
 
 
 if __name__ == "__main__":
-    if sys.argv[1] == "init":
+    if len(sys.argv) > 1 and sys.argv[1] == "init":
         create_tables()
         Categories_request().fill_db()
         Products_request().fill_db()
-        app.run(debug=True)
-    elif sys.argv[1] == "run":
-        app.run(debug=True)
+    app.run(debug=True)
