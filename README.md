@@ -12,7 +12,7 @@ Lors de votre visite, vous aurez la possibilité d'enregistrer un substitut afin
 
 -------------------------------------------------------------------------------
 
-## Instalation & lancement ##
+## Installation & lancement ##
 
 Télécharger et décompresser le repository puis créer un VENV. Installez ensuite le requirements.txt
 
